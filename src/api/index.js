@@ -1,5 +1,5 @@
-// let SERVICE = `http://result.eolinker.com/3nr3tizeeed5ac26c35f83668536bcda0a0f2e290d0ca19?uri=`;
-let SERVICE = `http://120.79.174.12:9013/`;
+let SERVICE = `http://result.eolinker.com/3nr3tizeeed5ac26c35f83668536bcda0a0f2e290d0ca19?uri=`;
+// let SERVICE = `http://120.79.174.12:9013/`;
 
 import URLS from './interface.js';
 
@@ -72,4 +72,15 @@ export default {
     cart_changeproductquantity(data, callBack) {return api(SERVICE + URLS.CART_CHANGEPRODUCTQUANTITY, data, callBack);},
     // 【1004】从购物车删除商品	POST 
     cart_deletefromcart(data, callBack) {return api(SERVICE + URLS.CART_DELETEFROMCART, data, callBack);},
+
+
+    // 登录
+    // 【202】获取 缤纷服务站点 信息	POST
+    getbranchinfo(data, callBack) {return api(SERVICE + URLS.GETBRANCHINFO, data, callBack);},
+    // 【200】验证用户登录信息	POST
+    login(data, callBack) {return api(SERVICE + URLS.LOGIN, data, callBack);},
+    // 【203】退出	POST
+    logout(data, callBack) {return api(SERVICE + URLS.LOGOUT, data, callBack);},
+    // 【201】验证用户注册信息	POST
+    register(data, callBack) {return api(SERVICE + URLS.REGISTER, data, callBack);},
 };

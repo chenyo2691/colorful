@@ -31,4 +31,14 @@ export default {
     CART_CHANGEPRODUCTQUANTITY: `api/cart/changeproductquantity`,
     // 【1004】从购物车删除商品	POST 
     CART_DELETEFROMCART: `api/cart/deletefromcart`,
+
+    // 登录
+    // 【202】获取 缤纷服务站点 信息	POST
+    GETBRANCHINFO: 'api/getbranchinfo',
+    // 【200】验证用户登录信息	POST
+    LOGIN: 'api/login',
+    // 【203】退出	POST
+    LOGOUT: 'api/logout',
+    // 【201】验证用户注册信息	POST
+    REGISTER: 'api/register',
 };

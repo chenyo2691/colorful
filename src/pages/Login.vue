@@ -4,7 +4,7 @@
         <f7-list form>
             <f7-list-item>
                 <f7-label>用户</f7-label>
-                <f7-input type="text" placeholder="Your username" @input="username = $event.target.value"></f7-input>
+                <f7-input type="text" placeholder="Your memberNumber" @input="memberNumber = $event.target.value"></f7-input>
             </f7-list-item>
             <f7-list-item>
                 <f7-label>密码</f7-label>
@@ -18,10 +18,11 @@
     </f7-page>
 </template>
 <script>
+import api from '@/api/index.js';
 export default {
     data() {
         return {
-            username: '',
+            memberNumber: '',
             password: '',
         };
     },
@@ -30,9 +31,17 @@ export default {
             const self = this;
             const app = self.$f7;
             const router = self.$f7router;
-            app.dialog.alert(`Username: ${self.username}<br>Password: ${self.password}`, () => {
-                router.back();
-            });
+            // app.dialog.alert(`memberNumber: ${self.memberNumber}<br>Password: ${self.password}`, () => {
+            //     router.back();
+            // });
+            api.login(
+                {language: 'tc', memberNumber: this.memberNumber, password: this.password},
+                function (res) {
+                    if (!res.code) {
+                        console.log(res);
+                    }
+                }.bind(this)
+            );
         },
     },
 };

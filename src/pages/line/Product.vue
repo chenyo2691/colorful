@@ -233,20 +233,22 @@ export default {
                 self.notificationFull.open();
                 return false;
             }
-            api.cart_addproducttocart(this.formItem,
-                function (res) {
-                    if (!res.code) {
-                        const self = this;
-                        if (!self.notificationFull) {
-                            self.notificationFull = self.$f7.notification.create({
-                                title: '订购成功',
-                                closeTimeout: 3000,
-                            });
+            else {
+                api.cart_addproducttocart(this.formItem,
+                    function (res) {
+                        if (!res.code) {
+                            const self = this;
+                            if (!self.notificationFull) {
+                                self.notificationFull = self.$f7.notification.create({
+                                    title: '订购成功',
+                                    closeTimeout: 3000,
+                                });
+                            }
+                            self.notificationFull.open();
                         }
-                        self.notificationFull.open();
-                    }
-                }.bind(this)
-            );
+                    }.bind(this)
+                );
+            }
         }
     }
 }
