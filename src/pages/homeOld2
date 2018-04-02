@@ -1,0 +1,99 @@
+<template>
+    <f7-page>
+        <f7-navbar>
+            <f7-nav-left>
+                <f7-link icon-if-ios="f7:menu" icon-if-md="material:menu" panel-open="left"></f7-link>
+            </f7-nav-left>
+            <f7-nav-title>缤纷</f7-nav-title>
+        </f7-navbar>
+        <f7-block class="demo-facebook-card">
+            <div class="demo-facebook-avatar">
+                <img :src="ICON" width="70" height="70" />
+            </div>
+            <div>
+                <div class="demo-facebook-name">缤纷</div>
+                <div class="demo-facebook-date">Brighten-Mall</div>
+            </div>
+        </f7-block>
+        <f7-block>
+            <f7-grid class="module-contanier">
+                <f7-col width="50" tablet-width="25" class="menu-module" :style="`background-image:url(${MODULEBG})`">
+                    <p>网&nbsp;购</p>
+                    <p>On Line</p>
+                </f7-col>
+                <f7-col width="50" tablet-width="25" class="menu-module" :style="`background-image:url(${MODULEBG})`">
+                    <p>新&nbsp;品</p>
+                    <p>New</p>
+                </f7-col>
+                <f7-col width="50" tablet-width="25" class="menu-module" :style="`background-image:url(${MODULEBG})`">
+                    <p>竞&nbsp;购</p>
+                    <p>Auction</p>
+                </f7-col>
+                <f7-col width="50" tablet-width="25" class="menu-module" :style="`background-image:url(${MODULEBG})`">
+                    <p>网&nbsp;购</p>
+                    <p>On Site</p>
+                </f7-col>
+            </f7-grid>
+        </f7-block>
+    </f7-page>
+</template>
+<script>
+import ICON from 'static/img/icon.png';
+import BG from 'static/img/bg.png';
+export default {
+    data() {
+        return {
+            ICON,
+            BG,
+            MODULEBG: 'http://lorempixel.com/1000/600/people/6/'
+        }
+    }
+}
+</script>
+<style lang="less" scoped>
+.tt {
+  border: 1px solid black;
+}
+.demo-facebook-card {
+  //   height: 25vw;
+  display: flex;
+  align-items: flex-end;
+  .demo-facebook-avatar {
+    width: 70px;
+  }
+  .demo-facebook-name {
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .demo-facebook-date {
+    margin-left: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #8e8e93;
+  }
+}
+.module-contanier {
+  .menu-module {
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    height: 50vw;
+    border: 1px solid black;
+    border-radius: 6%;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+</style>
+
