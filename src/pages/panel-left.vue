@@ -12,8 +12,8 @@
             <f7-list-item link="/login/" title="登录" view="#main-view" panel-close></f7-list-item>
             <f7-list-item link="/form/" title="我的订单" view="#main-view" panel-close></f7-list-item>
             <f7-list-item link="/form/" title="我的积分" view="#main-view" panel-close></f7-list-item>
+            <f7-list-item link="/consultation/Index/" title="咨询" view="#main-view" panel-close></f7-list-item>
         </f7-list>
-        <f7-block-title>咨询</f7-block-title>
     </f7-page>
 </template>
 <script>

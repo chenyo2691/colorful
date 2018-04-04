@@ -1,5 +1,5 @@
-let SERVICE = `http://result.eolinker.com/3nr3tizeeed5ac26c35f83668536bcda0a0f2e290d0ca19?uri=`;
-// let SERVICE = `http://120.79.174.12:9013/`;
+// let SERVICE = `http://result.eolinker.com/3nr3tizeeed5ac26c35f83668536bcda0a0f2e290d0ca19?uri=`;
+let SERVICE = `http://120.79.174.12:9013/`;
 
 import URLS from './interface.js';
 
@@ -16,10 +16,11 @@ let api = function (url, data, callBack) {
         data: JSON.stringify(data),
         error: function (xhr, status) {
             window.$f7.dialog.close();
-            window.$f7.dialog.alert('加载失败');
+            window.$f7.dialog.alert('加载失败', '系统系统');
         },
         success: function (data, status, xhr) {
             let res = JSON.parse(data);
+            console.log(res);
             if (res.code) {
                 if (res.code === 100001) {
                     // 登录
@@ -28,7 +29,7 @@ let api = function (url, data, callBack) {
                     });
                 }
                 else {
-                    window.$f7.dialog.alert(res.message);
+                    window.$f7.dialog.alert(res.message, '系统系统');
                 }
             }
             else {
@@ -62,6 +63,19 @@ export default {
     // 【305】获取客服联系电话	POST
     online_getcustomerservicelist(data, callBack) {return api(SERVICE + URLS.ONLINE_GETCUSTOMERSERVICELIST, data, callBack);},
 
+    // 新品
+    // 【900】获取新品大类信息	POST
+    new_getmaincategorylist(data, callBack) {return api(SERVICE + URLS.NEW_GETMAINCATEGORYLIST, data, callBack);},
+    // 【901】通过大类获取中类	POST
+    new_getmiddlecategorylist(data, callBack) {return api(SERVICE + URLS.NEW_GETMIDDLECATEGORYLIST, data, callBack);},
+    // 【903】通过小类获取列表	POST
+    new_getproductlist(data, callBack) {return api(SERVICE + URLS.NEW_GETPRODUCTLIST, data, callBack);},
+    // 【904】获取商品购物页信息	POST
+    new_getproductinfo(data, callBack) {return api(SERVICE + URLS.NEW_GETPRODUCTINFO, data, callBack);},
+    // 【902】通过中类获取小类	POST
+    new_getsubcategorylist(data, callBack) {return api(SERVICE + URLS.NEW_GETSUBCATEGORYLIST, data, callBack);},
+    // 【905】获取客服联系电话	POST
+    new_getcustomerservicelist(data, callBack) {return api(SERVICE + URLS.NEW_GETCUSTOMERSERVICELIST, data, callBack);},
 
     // 购物车
     // 【1001】放入购物车	POST 

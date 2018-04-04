@@ -105,7 +105,7 @@ export default {
                 token: '',
                 productUuid: '',
                 purchaseQuantity: 0,
-                salesMode: 'Online',
+                salesMode: 'New',
                 deliveryDate: ''
             },
             atp: 0,
@@ -170,7 +170,7 @@ export default {
             this.formItem.productUuid = query.uuid;
         },
         getData() {
-            api.online_getproductinfo(
+            api.new_getproductinfo(
                 {language: 'tc', productUuid: this.productUuid},
                 function (res) {
                     if (!res.code) {

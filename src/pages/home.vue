@@ -76,9 +76,9 @@ export default {
                     });
                     break;
                 case 'new':
-                    // this.$f7router.navigate('/new/FirstLevel/', {
-                    //     history: true
-                    // });
+                    this.$f7router.navigate('/new/FirstLevel/', {
+                        history: true
+                    });
                     break;
 
                 default:

@@ -21,6 +21,20 @@ export default {
     // 【305】获取客服联系电话	POST
     ONLINE_GETCUSTOMERSERVICELIST: `api/online/getcustomerservicelist`,
 
+    // 新品
+    // 【900】获取新品大类信息	POST
+    NEW_GETMAINCATEGORYLIST: `api/new/getmaincategorylist`,
+    // 【901】通过大类获取中类	POST
+    NEW_GETMIDDLECATEGORYLIST: `api/new/getmiddlecategorylist`,
+    // 【903】通过小类获取列表	POST
+    NEW_GETPRODUCTLIST: `api/new/getproductlist`,
+    // 【904】获取商品购物页信息	POST
+    NEW_GETPRODUCTINFO: `api/new/getproductinfo`,
+    // 【902】通过中类获取小类	POST
+    NEW_GETSUBCATEGORYLIST: `api/new/getsubcategorylist`,
+    // 【905】获取客服联系电话	POST
+    NEW_GETCUSTOMERSERVICELIST: `api/new/getcustomerservicelist`,
+
 
     // 购物车
     // 【1001】放入购物车	POST 

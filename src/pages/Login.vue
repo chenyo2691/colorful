@@ -13,12 +13,14 @@
         </f7-list>
         <f7-list>
             <f7-list-button @click="signIn">登录</f7-list-button>
-            <f7-block-footer>登录遇到问题？</f7-block-footer>
+            <f7-list-button @click="signIn">去注册</f7-list-button>
+            <!-- <f7-block-footer>登录遇到问题？</f7-block-footer> -->
         </f7-list>
     </f7-page>
 </template>
 <script>
 import api from '@/api/index.js';
+import storage from '@/utils/xStorage.js';
 export default {
     data() {
         return {
@@ -38,10 +40,42 @@ export default {
                 {language: 'tc', memberNumber: this.memberNumber, password: this.password},
                 function (res) {
                     if (!res.code) {
-                        console.log(res);
+                        storage.lStorage.setData('memberInfo', res.data);
+                        app.dialog.alert(`${self.memberNumber}登录成功<br>感谢回来`, '系统提示', () => {
+                            router.back();
+                        });
+                        // let memberInfo = {
+                        //     branchInfo: {
+                        //         branchName: '东区店铺',
+                        //         staffName: '马德钟'
+                        //     },
+                        //     memberInfo: {
+                        //         memberEmail: 'a@b.com',
+                        //         memberName: '小梁',
+                        //         memberNumber: '5ab5cf4e',
+                        //         memberUuid: '7a273fa8-d32e-47af-9d72-c26f4a115838',
+                        //         phoneNumber: '123700000'
+                        //     },
+                        //     token: 'NWFiNWNmNGUt5bCP5qKBLTE1MjI4MjMxNDE='
+                        // };
                     }
                 }.bind(this)
             );
+            // console.log('设置前获取');
+            // console.log('lStorage', storage.lStorage.getData('memberNumber'));
+            // console.log('sStorage', storage.sStorage.getData('memberNumber'));
+            // console.log('---------------------------------');
+
+            // console.log('从这里开始测试storage');
+            // console.log('设置lStorage');
+            // storage.lStorage.setData('memberNumber', this.memberNumber);
+            // console.log('获取lStorage');
+            // console.log(storage.lStorage.getData('memberNumber'));
+            // console.log('---------------------------------');
+            // console.log('设置sStorage');
+            // storage.sStorage.setData('memberNumber', this.memberNumber);
+            // console.log('获取sStorage');
+            // console.log(storage.sStorage.getData('memberNumber'));
         },
     },
 };
