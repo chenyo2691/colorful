@@ -31,7 +31,9 @@ import Terms from './pages/consultation/Terms.vue';
 import Tips from './pages/consultation/Tips.vue';
 
 // 登录
-import Login from './pages/Login.vue';
+import Login from './pages/common/Login.vue';
+import Forget from './pages/common/Forget.vue';
+import Register from './pages/common/Register.vue';
 
 export default [
     {
@@ -41,6 +43,14 @@ export default [
     {
         path: '/login/',
         component: Login,
+    },
+    {
+        path: '/Forget/',
+        component: Forget,
+    },
+    {
+        path: '/Register/',
+        component: Register,
     },
     {
         path: '/consultation/',

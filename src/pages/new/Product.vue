@@ -166,7 +166,7 @@ export default {
         init() {
             let query = this.$f7route.query;
             this.productUuid = query.uuid;
-            this.pageTitle = '网购';
+            this.pageTitle = '新品';
             this.formItem.productUuid = query.uuid;
         },
         getData() {
@@ -222,17 +222,18 @@ export default {
         quantityChange(val) {
             this.formItem.purchaseQuantity = val;
         },
+        showToastCenter(msg) {
+            const self = this;
+            self.$f7.toast.create({
+                text: msg,
+                position: 'center',
+                closeTimeout: 2000,
+            }).open();
+        },
         submit() {
             let quantity = this.formItem.purchaseQuantity;
             if (quantity === 0) {
-                const self = this;
-                if (!self.notificationFull) {
-                    self.notificationFull = self.$f7.notification.create({
-                        title: '购买数量不能为0',
-                        closeTimeout: 3000,
-                    });
-                }
-                self.notificationFull.open();
+                this.showToastCenter('购买数量不能为0');
                 return false;
             }
             else {
@@ -243,14 +244,7 @@ export default {
                 api.cart_addproducttocart(this.formItem,
                     function (res) {
                         if (!res.code) {
-                            const self = this;
-                            if (!self.notificationFull) {
-                                self.notificationFull = self.$f7.notification.create({
-                                    title: '订购成功',
-                                    closeTimeout: 3000,
-                                });
-                            }
-                            self.notificationFull.open();
+                            this.showToastCenter('订购成功');
                         }
                     }.bind(this)
                 );

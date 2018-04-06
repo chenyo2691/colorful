@@ -11,11 +11,15 @@
                 <f7-input type="password" placeholder="Your password" @input="password = $event.target.value"></f7-input>
             </f7-list-item>
         </f7-list>
-        <f7-list>
-            <f7-list-button @click="signIn">登录</f7-list-button>
-            <f7-list-button @click="signIn">去注册</f7-list-button>
-            <!-- <f7-block-footer>登录遇到问题？</f7-block-footer> -->
+        <f7-list inset>
+            <f7-list-button title="登录" color="black" @click="signIn"></f7-list-button>
         </f7-list>
+        <f7-block>
+            <f7-list>
+                <f7-link @click="forget">忘记密码？</f7-link>
+                <f7-link @click="register" style="float:right">注册</f7-link>
+            </f7-list>
+        </f7-block>
     </f7-page>
 </template>
 <script>
@@ -77,6 +81,20 @@ export default {
             // console.log('获取sStorage');
             // console.log(storage.sStorage.getData('memberNumber'));
         },
+        forget() {
+            this.$f7router.navigate(`/Forget/`, {
+                history: true,
+                animate: false,
+                ignoreCache: false
+            });
+        },
+        register() {
+            this.$f7router.navigate(`/Register/`, {
+                history: true,
+                animate: false,
+                ignoreCache: false
+            });
+        }
     },
 };
 </script>
