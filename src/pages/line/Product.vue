@@ -15,7 +15,7 @@
                 <span slot="title">{{data.productENName}}</span>
                 <span slot="subtitle">{{data.productTCName}}</span>
                 <span slot="after">
-                    <f7-link @click="popupDetail" v-show="data.detailTCContent">详情</f7-link>
+                    <f7-link @click="popupDetail" v-show="data.remark">详情</f7-link>
                 </span>
             </f7-list-item>
             <f7-list-item>
@@ -37,13 +37,13 @@
         </f7-list>
 
         <f7-toolbar bottom-md>
-            <f7-button big raised style="width:100%" @click="submit">立即订购</f7-button>
+            <f7-button style="width:100%" @click="submit">立即订购</f7-button>
         </f7-toolbar>
 
         <!-- Add stepper-init class -->
         <!-- {{data.atp}}
         {{data.deliverDay}}
-        {{data.detailTCContent}}
+        {{data.remark}}
         {{data.guaranteeDay}}
        
         {{data.productUuid}}
@@ -88,7 +88,7 @@ export default {
             productUuid: '',
             pageTitle: '',
             data: {
-                detailTCContent: null,
+                remark: null,
                 imageName: {
                     primary: {},
                     other: []
@@ -205,8 +205,7 @@ export default {
               <div class="sheet-modal-inner">
                 <div class="page-content">
                   <div class="block">
-                    <p>这是一个感人的故事</p>
-                    <p>故事已结束</p>
+                    <p>${this.data.remark}</p>
                   </div>
                 </div>
               </div>
@@ -237,17 +236,26 @@ export default {
                 return false;
             }
             else {
-                this.formItem = Object.assign({}, this.formItem, {
-                    token: storage.lStorage.getData('memberInfo').token,
-                    deliveryDate: this.uploadDate[0]
-                });
-                api.cart_addproducttocart(this.formItem,
-                    function (res) {
-                        if (!res.code) {
-                            this.showToastCenter('订购成功');
-                        }
-                    }.bind(this)
-                );
+                if (storage.lStorage.getData('memberInfo') === null) {
+                    this.$f7router.navigate(`/Login/`, {
+                        history: true,
+                        animate: false,
+                        ignoreCache: false
+                    });
+                }
+                else {
+                    this.formItem = Object.assign({}, this.formItem, {
+                        token: storage.lStorage.getData('memberInfo').token,
+                        deliveryDate: this.uploadDate[0]
+                    });
+                    api.cart_addproducttocart(this.formItem,
+                        function (res) {
+                            if (!res.code) {
+                                this.showToastCenter('订购成功');
+                            }
+                        }.bind(this)
+                    );
+                }
             }
         }
     }
