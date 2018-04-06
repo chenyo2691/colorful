@@ -8,7 +8,11 @@
             </f7-list-item>
             <f7-list-item>
                 <f7-label>手机号码</f7-label>
-                <f7-input type="text" :value="form.phoneNumber" @input="form.phoneNumber = $event.target.value" @input:clear="form.phoneNumber = ''" clear-button></f7-input>
+                <f7-input type="text" :value="form.phoneNumber" @input="form.phoneNumber = $event.target.value" @input:clear="form.phoneNumber = ''" error-message="请输入数字!" required validate pattern="[0-9]*" clear-button></f7-input>
+            </f7-list-item>
+            <f7-list-item>
+                <f7-label>邮箱</f7-label>
+                <f7-input type="email" :value="form.email" @input="form.email = $event.target.value" @input:clear="form.email = ''" required validate clear-button></f7-input>
             </f7-list-item>
             <f7-list-item>
                 <f7-label>设置密码</f7-label>
@@ -34,7 +38,6 @@
                 </select>
             </f7-list-item>
         </f7-list>
-        {{form}}
         <f7-list inset>
             <f7-list-button title="注册" color="black" @click="register"></f7-list-button>
         </f7-list>
@@ -63,6 +66,14 @@ export default {
         };
     },
     methods: {
+        showToastCenter(msg) {
+            const self = this;
+            self.$f7.toast.create({
+                text: msg,
+                position: 'center',
+                closeTimeout: 2000,
+            }).open();
+        },
         init() {
             api.getbranchinfo({language: 'tc'},
                 function (res) {
@@ -74,10 +85,26 @@ export default {
             );
         },
         register() {
-            console.log('register!');
+            if (this.form.password !== this.form.passwordConfirm) {
+                this.showToastCenter('两次密码输入不一致');
+            }
+            else {
+                api.register(this.form,
+                    function (res) {
+                        if (!res.code) {
+                            const self = this;
+                            const app = self.$f7;
+                            const router = self.$f7router;
+                            app.dialog.alert(`恭喜注册成功`, '系统提示', () => {
+                                router.back();
+                            });
+                        }
+                    }.bind(this)
+                );
+            }
         },
         branchChange(event) {
-            console.log('change');
+            // console.log('change');
             this.form.staffUuid = '';
             // 修改after
             const self = this;
