@@ -2,9 +2,25 @@
     <f7-page class="first-container">
         <f7-navbar>
             <f7-nav-left>
-                <f7-link icon-if-ios="f7:menu" icon-if-md="material:menu" panel-open="left"></f7-link>
+                <f7-link back class="nav-icon">
+                    <i class="fa fa-chevron-left"></i>
+                </f7-link>
+                <f7-link class="nav-icon" panel-open="left">
+                    <i class="fa fa-bars"></i>
+                </f7-link>
             </f7-nav-left>
             <f7-nav-title>{{pageTitle}}</f7-nav-title>
+            <f7-nav-right>
+                <f7-link class="nav-icon">
+                    <i class="fa fa-qrcode"></i>
+                </f7-link>
+                <f7-link class="nav-icon" href="/CartList/">
+                    <i class="fa fa-shopping-cart"></i>
+                </f7-link>
+                <f7-link class="nav-icon">
+                    <i class="fa fa-file"></i>
+                </f7-link>
+            </f7-nav-right>
         </f7-navbar>
         <f7-row no-gap class="item-container">
             <f7-col width="50" v-for="(item,index) in data" :key="index">
@@ -57,6 +73,9 @@ export default {
 </script>
 <style lang="less" scoped>
 .first-container {
+  .nav-icon {
+    padding: 0 1rem;
+  }
   .item-container {
     padding: 8px;
   }

@@ -2,7 +2,9 @@
     <f7-page class="home-container">
         <f7-navbar>
             <f7-nav-left>
-                <f7-link icon-if-ios="f7:menu" icon-if-md="material:menu" panel-open="left"></f7-link>
+                <f7-link class="nav-icon" panel-open="left">
+                    <i class="fa fa-bars"></i>
+                </f7-link>
             </f7-nav-left>
             <f7-nav-title>缤纷</f7-nav-title>
         </f7-navbar>

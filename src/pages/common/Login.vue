@@ -4,11 +4,11 @@
         <f7-list form>
             <f7-list-item>
                 <f7-label>用户</f7-label>
-                <f7-input type="text" @input="memberNumber = $event.target.value"></f7-input>
+                <f7-input type="text" @input="memberNumber = $event.target.value" @input:clear="memberNumber = ''" clear-button></f7-input>
             </f7-list-item>
             <f7-list-item>
                 <f7-label>密码</f7-label>
-                <f7-input type="password"  @input="password = $event.target.value"></f7-input>
+                <f7-input type="password"  @input="password = $event.target.value" @input:clear="password = ''" clear-button></f7-input>
             </f7-list-item>
         </f7-list>
         <f7-list inset>

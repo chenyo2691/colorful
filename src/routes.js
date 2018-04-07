@@ -35,6 +35,9 @@ import Login from './pages/common/Login.vue';
 import Forget from './pages/common/Forget.vue';
 import Register from './pages/common/Register.vue';
 
+// 购物车
+import CartList from './pages/cart/List.vue';
+
 export default [
     {
         path: '/',
@@ -51,6 +54,10 @@ export default [
     {
         path: '/Register/',
         component: Register,
+    },
+    {
+        path: '/CartList/',
+        component: CartList,
     },
     {
         path: '/consultation/',
