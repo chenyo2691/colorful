@@ -44,7 +44,7 @@ export default [
         component: HomePage,
     },
     {
-        path: '/login/',
+        path: '/Login/',
         component: Login,
     },
     {

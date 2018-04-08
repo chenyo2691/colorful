@@ -124,8 +124,7 @@ export default {
             ppUuid: '',
             pUuid: '',
             pageTitle: '',
-            data: [],
-            APPICON
+            data: []
         }
     },
     methods: {

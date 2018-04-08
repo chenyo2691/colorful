@@ -9,7 +9,7 @@
         </f7-list>
         <f7-block-title>会员中心</f7-block-title>
         <f7-list>
-            <f7-list-item link="/login/" title="登录" view="#main-view" panel-close></f7-list-item>
+            <f7-list-item link="/Login/" title="登录" view="#main-view" panel-close></f7-list-item>
             <f7-list-item link="/form/" title="我的订单" view="#main-view" panel-close></f7-list-item>
             <f7-list-item link="/form/" title="我的积分" view="#main-view" panel-close></f7-list-item>
             <f7-list-item link="/consultation/Index/" title="咨询" view="#main-view" panel-close></f7-list-item>

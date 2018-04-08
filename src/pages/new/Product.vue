@@ -109,8 +109,7 @@ export default {
                 deliveryDate: ''
             },
             atp: 0,
-            uploadDate: [],
-            APPICON
+            uploadDate: []
         }
     },
     on: {

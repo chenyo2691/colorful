@@ -24,12 +24,17 @@ let api = function (url, data, callBack) {
             if (res.code) {
                 if (res.code === 100001) {
                     // 登录
-                    window.$f7router.navigate('/login/', {
-                        history: false
+                    window.$f7router.navigate('/Login/', {
+                        reloadCurrent: true,
+                        history: false,
+                        animate: false,
+                        ignoreCache: false
                     });
+                    window.$f7.dialog.close();
+                    return false;
                 }
                 else {
-                    window.$f7.dialog.alert(res.message, '系统系统');
+                    window.$f7.dialog.alert(res.message, '系统提示');
                 }
             }
             else {

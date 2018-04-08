@@ -50,7 +50,7 @@
                 <div class="swipeout-content">
                     <div class="item-content">
                         <div class="item-media">
-                            <img :src="APPICON" width="80" />
+                            <img :src="item.imageName.primary.img" width="80" />
                         </div>
                         <div class="item-inner item-cell">
                             <div class="item-row">
@@ -112,7 +112,7 @@
 </template>
 <script>
 import api from '@/api/index.js';
-import APPICON from 'static/icon/AOS/app/192x192/192.png';
+// import APPICON from 'static/icon/AOS/app/192x192/192.png';
 export default {
     mounted() {
         this.init();
