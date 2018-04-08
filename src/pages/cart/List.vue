@@ -1,33 +1,114 @@
 <template>
     <f7-page class="cart-container">
-        <f7-navbar>
-            <f7-nav-left>
-                <f7-link back class="nav-icon">
-                    <i class="fa fa-chevron-left"></i>
-                </f7-link>
-                <f7-link class="nav-icon" panel-open="left">
-                    <i class="fa fa-bars"></i>
-                </f7-link>
-            </f7-nav-left>
-            <f7-nav-title>{{pageTitle}}</f7-nav-title>
-            <f7-nav-right>
-                <f7-link class="nav-icon">
-                    <i class="fa fa-qrcode"></i>
-                </f7-link>
-                <f7-link class="nav-icon">
-                    <i class="fa fa-shopping-cart"></i>
-                </f7-link>
-                <f7-link class="nav-icon">
-                    <i class="fa fa-file"></i>
-                </f7-link>
-            </f7-nav-right>
-        </f7-navbar>
+        <div v-show="currentStep===0">
+            <f7-navbar>
+                <f7-nav-left>
+                    <f7-link back class="nav-icon">
+                        <i class="fa fa-chevron-left"></i>
+                    </f7-link>
+                    <f7-link class="nav-icon" panel-open="left">
+                        <i class="fa fa-bars"></i>
+                    </f7-link>
+                </f7-nav-left>
+                <f7-nav-title>{{pageTitle}}</f7-nav-title>
+                <f7-nav-right>
+                    <f7-link class="nav-icon">
+                        <i class="fa fa-qrcode"></i>
+                    </f7-link>
+                    <f7-link class="nav-icon">
+                        <i class="fa fa-shopping-cart"></i>
+                    </f7-link>
+                    <f7-link class="nav-icon">
+                        <i class="fa fa-file"></i>
+                    </f7-link>
+                </f7-nav-right>
+            </f7-navbar>
 
-        <f7-list>
-            <li class="swipeout swipeout-transitioning" v-for="(item,index) in productList" :key="index">
-                <div class="swipeout-content">
+            <f7-list>
+                <li class="swipeout swipeout-transitioning" v-for="(item,index) in productList" :key="index">
+                    <div class="swipeout-content">
+                        <div class="item-content">
+                            <f7-checkbox style="padding-right:16px;" :checked="item.isCheck" @change="itemCheck($event, index)"></f7-checkbox>
+                            <div class="item-media">
+                                <img :src="item.productImageName.primary.img" width="80" />
+                            </div>
+                            <div class="item-inner item-cell">
+                                <div class="item-row">
+                                    <div class="item-cell">
+                                        <div class="c-ellipsis">
+                                            {{item.productName}}
+                                        </div>
+                                    </div>
+                                    <div class="item-cell">
+                                        <div class="c-ellipsis">
+                                            {{item.productNumber}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-row">
+                                    <div class="item-cell">
+                                        <div class="c-ellipsis">
+                                            {{item.productSpecification}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-row">
+                                    <div class="item-cell">
+                                        <div class="c-ellipsis">
+                                            {{item.deliveryDay | dfm}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item-row">
+                                    <div class="item-cell">
+                                        <div>
+                                            <span style="color:red">{{`HK$${item.purchasePrice}`}}</span>
+                                            <CStepper style="float:right" v-model="item.purchaseQuantity" :min="0" :max="100" @change="quantityChange($event,index)"></CStepper>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <f7-swipeout-actions right>
+                        <f7-swipeout-button color="red" @click="deletePro(index)">删除</f7-swipeout-button>
+                    </f7-swipeout-actions>
+                </li>
+            </f7-list>
+
+        </div>
+        <div v-show="currentStep===1">
+            <f7-navbar>
+                <f7-nav-left>
+                    <f7-link class="nav-icon" @click="currentStep--">
+                        <i class="fa fa-chevron-left">确认订单</i>
+                    </f7-link>
+                </f7-nav-left>
+            </f7-navbar>
+
+            <!-- 提货方式 -->
+            <f7-block strong>
+                <p>
+                    <label>
+                        <f7-radio name="deliveryType" value="Delivery" :checked="deliveryType === 'Delivery'" @change="deliveryType = $event.target.value"></f7-radio>送货
+                    </label>
+                    <label>
+                        <f7-radio name="deliveryType" value="Pick" :checked="deliveryType === 'Pick'" @change="deliveryType = $event.target.value"></f7-radio>自提
+                    </label>
+                </p>
+            </f7-block>
+
+            <!-- 提货地址 -->
+            <f7-list media-list>
+                <f7-list-item link="#" title="JACK" after="12345678999">
+                    <i slot="media" class="fa fa-map-marker fa-2x" style="margin:0 auto;color:#757575;"></i>
+                    <div slot="text">s tellus. Mauris rt, commodo augue id, pulvinar lacus.</div>
+                </f7-list-item>
+            </f7-list>
+
+            <f7-list>
+                <li v-for="(item,index) in productList" :key="index" v-if="item.isCheck">
                     <div class="item-content">
-                        <f7-checkbox style="padding-right:16px;" :checked="item.isCheck" @change="itemCheck($event, index)"></f7-checkbox>
                         <div class="item-media">
                             <img :src="item.productImageName.primary.img" width="80" />
                         </div>
@@ -62,26 +143,27 @@
                                 <div class="item-cell">
                                     <div>
                                         <span style="color:red">{{`HK$${item.purchasePrice}`}}</span>
-                                        <CStepper style="float:right" v-model="item.purchaseQuantity" :min="0" :max="100" @change="quantityChange($event,index)"></CStepper>
+                                        <span style="float:right">x {{item.purchaseQuantity}}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <f7-swipeout-actions right>
-                    <f7-swipeout-button color="red" @click="deletePro(index)">删除</f7-swipeout-button>
-                </f7-swipeout-actions>
-            </li>
-        </f7-list>
+                </li>
+            </f7-list>
+
+        </div>
 
         <f7-toolbar bottom-md>
-            <span style="padding-left:16px">
-                <f7-checkbox :checked="selectAll" @change="handleCheckAll"></f7-checkbox>
-                <span>全部</span>
+            <span style="padding-left:16px" v-show="currentStep===0">
+                <label><f7-checkbox :checked="selectAll" @change="handleCheckAll"></f7-checkbox>全部</label>
             </span>
-            <span>合计：{{totalValue}}元</span>
-            <div class="orderSubmitBtn" @click="submitorder">去结算({{productCheckLength}})</div>
+            <span v-show="currentStep===0">合计：{{totalValue}}元</span>
+            <div class="orderSubmitBtn" @click="submitorder" v-show="currentStep===0">去结算({{productCheckLength}})</div>
+
+            <span v-show="currentStep===1"></span>
+            <span v-show="currentStep===1">实付款：HK$4343.00</span>
+            <div class="orderSubmitBtn" v-show="currentStep===1">提交订单</div>
         </f7-toolbar>
     </f7-page>
 </template>
@@ -133,7 +215,10 @@ export default {
             pageTitle: '',
             productList: [],
             totalValue: 0,
-            selectAll: false
+            selectAll: false,
+            currentStep: 0,
+            // Delivery/Pick
+            deliveryType: 'Delivery'
         }
     },
     methods: {
@@ -206,6 +291,7 @@ export default {
         },
         submitorder() {
             console.log('提交订单');
+            this.currentStep++;
         }
     }
 }
