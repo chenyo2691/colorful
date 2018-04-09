@@ -46,11 +46,11 @@ export default {
   .number-input-btn {
     float: left;
     width: auto;
-    min-width: 28px;
+    min-width: 20px;
   }
   .number-input-text {
-    padding: 0 0.5rem;
-    font-size: 1.2rem;
+    padding: 0 0.3rem;
+    font-size: 1.1rem;
     display: flex;
     justify-content: center;
     align-items: center;

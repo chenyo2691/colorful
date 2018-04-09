@@ -58,6 +58,7 @@ import SITEBG from 'static/icon/AOS/standard/1920x1080/7.png';
 export default {
     mounted() {
         window.$f7router = this.$f7router;
+        // this.$f7router.clearPreviousHistory();
     },
     data() {
         return {

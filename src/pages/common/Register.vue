@@ -1,6 +1,13 @@
 <template>
     <f7-page no-toolbar no-navbar no-swipeback login-screen>
-        <f7-login-screen-title>手机注册</f7-login-screen-title>
+        <f7-navbar>
+            <f7-nav-left>
+                <f7-link back>
+                    <i class="fa fa-chevron-left">返回</i>
+                </f7-link>
+            </f7-nav-left>
+        </f7-navbar>
+        <f7-login-screen-title>缤纷注册</f7-login-screen-title>
         <f7-list inline-labels no-hairlines-md form>
             <f7-list-item>
                 <f7-label>姓名</f7-label>

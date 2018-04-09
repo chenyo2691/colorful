@@ -1,29 +1,37 @@
 <template>
     <f7-page class="cart-container">
-        <div v-show="currentStep===0">
-            <f7-navbar>
-                <f7-nav-left>
-                    <f7-link back class="nav-icon">
-                        <i class="fa fa-chevron-left"></i>
-                    </f7-link>
-                    <f7-link class="nav-icon" panel-open="left">
-                        <i class="fa fa-bars"></i>
-                    </f7-link>
-                </f7-nav-left>
-                <f7-nav-title>{{pageTitle}}</f7-nav-title>
-                <f7-nav-right>
-                    <f7-link class="nav-icon">
-                        <i class="fa fa-qrcode"></i>
-                    </f7-link>
-                    <f7-link class="nav-icon">
-                        <i class="fa fa-shopping-cart"></i>
-                    </f7-link>
-                    <f7-link class="nav-icon">
-                        <i class="fa fa-file"></i>
-                    </f7-link>
-                </f7-nav-right>
-            </f7-navbar>
+        <f7-navbar v-show="currentStep===0">
+            <f7-nav-left>
+                <f7-link back class="nav-icon">
+                    <i class="fa fa-chevron-left"></i>
+                </f7-link>
+                <f7-link class="nav-icon" panel-open="left">
+                    <i class="fa fa-bars"></i>
+                </f7-link>
+            </f7-nav-left>
+            <f7-nav-title>{{pageTitle}}</f7-nav-title>
+            <f7-nav-right>
+                <f7-link class="nav-icon">
+                    <i class="fa fa-qrcode"></i>
+                </f7-link>
+                <f7-link class="nav-icon">
+                    <i class="fa fa-shopping-cart"></i>
+                </f7-link>
+                <f7-link class="nav-icon">
+                    <i class="fa fa-file"></i>
+                </f7-link>
+            </f7-nav-right>
+        </f7-navbar>
 
+        <f7-navbar v-show="currentStep===1">
+            <f7-nav-left>
+                <f7-link class="nav-icon" @click="currentStep--">
+                    <i class="fa fa-chevron-left">确认订单</i>
+                </f7-link>
+            </f7-nav-left>
+        </f7-navbar>
+
+        <div v-show="currentStep===0">
             <f7-list>
                 <li class="swipeout swipeout-transitioning" v-for="(item,index) in productList" :key="index">
                     <div class="swipeout-content">
@@ -39,22 +47,24 @@
                                             {{item.productName}}
                                         </div>
                                     </div>
+                                </div>
+                                <div class="item-row">
                                     <div class="item-cell">
-                                        <div class="c-ellipsis">
+                                        <div class="c-ellipsis c-text">
                                             {{item.productNumber}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="item-row">
                                     <div class="item-cell">
-                                        <div class="c-ellipsis">
+                                        <div class="c-ellipsis c-text">
                                             {{item.productSpecification}}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="item-row">
                                     <div class="item-cell">
-                                        <div class="c-ellipsis">
+                                        <div class="c-ellipsis c-text">
                                             {{item.deliveryDay | dfm}}
                                         </div>
                                     </div>
@@ -62,7 +72,7 @@
                                 <div class="item-row">
                                     <div class="item-cell">
                                         <div>
-                                            <span style="color:red">{{`HK$${item.purchasePrice}`}}</span>
+                                            <span class="c-price">{{`HK$${item.purchasePrice}`}}</span>
                                             <CStepper style="float:right" v-model="item.purchaseQuantity" :min="0" :max="100" @change="quantityChange($event,index)"></CStepper>
                                         </div>
                                     </div>
@@ -75,17 +85,8 @@
                     </f7-swipeout-actions>
                 </li>
             </f7-list>
-
         </div>
         <div v-show="currentStep===1">
-            <f7-navbar>
-                <f7-nav-left>
-                    <f7-link class="nav-icon" @click="currentStep--">
-                        <i class="fa fa-chevron-left">确认订单</i>
-                    </f7-link>
-                </f7-nav-left>
-            </f7-navbar>
-
             <!-- 提货方式 -->
             <f7-block strong>
                 <p>
@@ -156,7 +157,8 @@
 
         <f7-toolbar bottom-md>
             <span style="padding-left:16px" v-show="currentStep===0">
-                <label><f7-checkbox :checked="selectAll" @change="handleCheckAll"></f7-checkbox>全部</label>
+                <label>
+                    <f7-checkbox :checked="selectAll" @change="handleCheckAll"></f7-checkbox>全部</label>
             </span>
             <span v-show="currentStep===0">合计：{{totalValue}}元</span>
             <div class="orderSubmitBtn" @click="submitorder" v-show="currentStep===0">去结算({{productCheckLength}})</div>
@@ -317,6 +319,14 @@ export default {
     white-space: nowrap;
     max-width: 100%;
     text-overflow: ellipsis;
+    &.c-text {
+      font-size: 12px;
+    }
+  }
+
+  .c-price {
+    color: red;
+    font-size: 14px;
   }
 }
 </style>

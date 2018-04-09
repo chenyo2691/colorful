@@ -1,6 +1,13 @@
 <template>
     <f7-page no-toolbar no-navbar no-swipeback login-screen>
-        <f7-login-screen-title>缤纷</f7-login-screen-title>
+        <f7-navbar>
+            <f7-nav-left>
+                <f7-link back>
+                    <i class="fa fa-chevron-left">返回</i>
+                </f7-link>
+            </f7-nav-left>
+        </f7-navbar>
+        <f7-login-screen-title>缤纷登录</f7-login-screen-title>
         <f7-list form>
             <f7-list-item>
                 <f7-label>用户</f7-label>
@@ -8,7 +15,7 @@
             </f7-list-item>
             <f7-list-item>
                 <f7-label>密码</f7-label>
-                <f7-input type="password"  @input="password = $event.target.value" @input:clear="password = ''" clear-button></f7-input>
+                <f7-input type="password" @input="password = $event.target.value" @input:clear="password = ''" clear-button></f7-input>
             </f7-list-item>
         </f7-list>
         <f7-list inset>
