@@ -3,7 +3,7 @@
         <li v-bind:class="[isEdit ? 'swipeout swipeout-transitioning' : '']" v-for="(item,index) in productList" :key="index">
             <div v-bind:class="[isEdit ? 'swipeout-content' : '']">
                 <div class="item-content">
-                    <f7-checkbox v-if="isEdit" style="padding-right:16px;" :checked="item.isCheck" @change="itemCheck($event, index)"></f7-checkbox>
+                    <f7-checkbox v-if="isEdit" class="c-check" :checked="item.isCheck" @change="itemCheck($event, index)"></f7-checkbox>
                     <div class="item-media">
                         <img :src="item.productImageName.primary.img" width="80" />
                     </div>
@@ -40,8 +40,8 @@
                             <div class="item-cell">
                                 <div>
                                     <span class="c-price">{{`HK$${item.purchasePrice}`}}</span>
-                                    <CStepper v-show="isEdit" style="float:right" v-model="item.purchaseQuantity" :min="0" :max="100" @change="quantityChange($event,index)"></CStepper>
-                                    <span v-show="!isEdit" style="float:right">x {{item.purchaseQuantity}}</span>
+                                    <CStepper v-show="isEdit" class="c-quantity" v-model="item.purchaseQuantity" :min="0" :max="100" @change="quantityChange($event,index)"></CStepper>
+                                    <span v-show="!isEdit" class="c-quantity">x {{item.purchaseQuantity}}</span>
                                 </div>
                             </div>
                         </div>
@@ -107,6 +107,14 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+.c-check {
+  padding-right: 16px;
+}
+
+.c-quantity {
+  float: right;
+}
+
 .c-ellipsis {
   position: relative;
   overflow: hidden;

@@ -102,4 +102,32 @@ export default {
     logout(data, callBack) {return api(SERVICE + URLS.LOGOUT, data, callBack);},
     // 【201】验证用户注册信息	POST
     register(data, callBack) {return api(SERVICE + URLS.REGISTER, data, callBack);},
+
+    // 订单
+    // 【701】提交订单	POST
+    submitorder(data, callBack) {return api(SERVICE + URLS.SUBMITORDER, data, callBack);},
+    // 【702】取消订单	POST
+    cancelorder(data, callBack) {return api(SERVICE + URLS.CANCELORDER, data, callBack);},
+    // 【700】获取订单信息	POST
+    getorderinfo(data, callBack) {return api(SERVICE + URLS.GETORDERINFO, data, callBack);},
+    // 【703】获取订单列表	POST
+    getorderlist(data, callBack) {return api(SERVICE + URLS.GETORDERLIST, data, callBack);},
+    // 【704】获取运费信息	POST
+    getdeliveryfee(data, callBack) {return api(SERVICE + URLS.GETDELIVERYFEE, data, callBack);},
+    // 【705】完成支付后的信息更新(测试用)	POST
+    finishpay(data, callBack) {return api(SERVICE + URLS.FINISHPAY, data, callBack);},
+    // 【706】获取可供配送的日期列表	POST
+    getavailabledeliverydate(data, callBack) {return api(SERVICE + URLS.GETAVAILABLEDELIVERYDATE, data, callBack);},
+
+    // 会员
+    // 【801】获取会员地址簿信息	POST
+    getcontactlist(data, callBack) {return api(SERVICE + URLS.GETCONTACTLIST, data, callBack);},
+    // 【802】新增地址项信息	POST
+    createcontact(data, callBack) {return api(SERVICE + URLS.CREATECONTACT, data, callBack);},
+    // 【803】修改地址项信息	POST
+    updatecontact(data, callBack) {return api(SERVICE + URLS.UPDATECONTACT, data, callBack);},
+    // 【804】删除地址簿信息	POST
+    deletecontact(data, callBack) {return api(SERVICE + URLS.DELETECONTACT, data, callBack);},
+    // 【805】获取区域信息	POST
+    getdistlist(data, callBack) {return api(SERVICE + URLS.GETDISTLIST, data, callBack);},
 };

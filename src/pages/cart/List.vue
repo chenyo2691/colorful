@@ -48,9 +48,13 @@
 
             <!-- 提货地址 -->
             <f7-list media-list>
-                <f7-list-item link="#" title="JACK" after="12345678999">
+                <!-- <f7-list-item link="#" title="JACK" after="12345678999">
                     <i slot="media" class="fa fa-map-marker fa-2x" style="margin:0 auto;color:#757575;"></i>
                     <div slot="text">s tellus. Mauris rt, commodo augue id, pulvinar lacus.</div>
+                </f7-list-item> -->
+
+                <f7-list-item v-if="contactList.length===0" link="/Address/" title="点击我新增地址" badge="新增" badge-color="blue">
+                    <i slot="media" class="fa fa-map-marker fa-2x" style="margin:0 auto;color:#757575;"></i>
                 </f7-list-item>
             </f7-list>
 
@@ -59,33 +63,30 @@
 
         <f7-toolbar bottom-md>
             <!-- step1 -->
-            <span style="padding-left:16px" v-show="currentStep===0">
+            <span v-if="currentStep===0" style="padding-left:16px">
                 <label>
                     <f7-checkbox :checked="selectAll" @change="handleCheckAll"></f7-checkbox>全部</label>
             </span>
-            <span v-show="currentStep===0">合计：{{totalValue}}元</span>
-            <div class="orderSubmitBtn" @click="++currentStep" v-show="currentStep===0">去结算({{productCheckLength}})</div>
+            <span v-if="currentStep===0">合计：{{totalValue}}元</span>
+            <div v-if="currentStep===0" class="orderSubmitBtn" @click="++currentStep">去结算({{productCheckLength}})</div>
             <!-- step2 -->
-            <span v-show="currentStep===1"></span>
-            <span v-show="currentStep===1">实付款：HK$4343.00</span>
-            <div class="orderSubmitBtn" v-show="currentStep===1" @click="submitorder">提交订单</div>
+            <span v-if="currentStep===1"></span>
+            <span v-if="currentStep===1">实付款：HK$4343.00</span>
+            <div class="orderSubmitBtn" v-if="currentStep===1" @click="submitorder">提交订单</div>
         </f7-toolbar>
     </f7-page>
 </template>
 <script>
 import api from '@/api/index.js';
 import storage from '@/utils/xStorage.js';
-// import CStepper from '@/components/CStepper.vue';
 import CartProduct from '@/components/CartProduct.vue';
 
 export default {
     components: {
-        // CStepper,
         CartProduct
     },
     mounted() {
         this.init();
-        this.getData();
     },
     computed: {
         productCheckLength: function () {
@@ -107,14 +108,12 @@ export default {
             selectAll: false,
             currentStep: 0,
             // Delivery/Pick
-            deliveryType: 'Delivery'
+            deliveryType: 'Delivery',
+            contactList: []
         }
     },
     methods: {
-        init() {
-            this.pageTitle = '购物车';
-        },
-        getData() {
+        checkMember() {
             if (storage.lStorage.getData('memberInfo') === null) {
                 this.$f7router.navigate(`/Login/`, {
                     history: true,
@@ -122,21 +121,40 @@ export default {
                     ignoreCache: false
                 });
             }
-            else {
-                api.cart_getcartlist(
-                    {token: storage.lStorage.getData('memberInfo').token},
-                    function (res) {
-                        if (!res.code) {
-                            let list = res.data.productList;
-                            list.forEach(function (element) {
-                                element.isCheck = false;
-                            }, this);
-                            this.productList = list;
-                            this.totalValue = res.data.totalValue;
-                        }
-                    }.bind(this)
-                );
-            }
+        },
+        init() {
+            this.pageTitle = '购物车';
+            this.checkMember();
+            this.getCartList();
+            this.getContactList();
+            // 
+        },
+        getCartList() {
+            // 购物车商品
+            api.cart_getcartlist(
+                {token: storage.lStorage.getData('memberInfo').token},
+                function (res) {
+                    if (!res.code) {
+                        let list = res.data.productList;
+                        list.forEach(function (element) {
+                            element.isCheck = false;
+                        }, this);
+                        this.productList = list;
+                        this.totalValue = res.data.totalValue;
+                    }
+                }.bind(this)
+            );
+        },
+        getContactList() {
+            // 获取会员地址簿信息
+            api.getcontactlist(
+                {token: storage.lStorage.getData('memberInfo').token, deliveryType: this.deliveryType},
+                function (res) {
+                    if (!res.code) {
+                        this.contactList = res.data.contactList;
+                    }
+                }.bind(this)
+            );
         },
         quantityChange($val, index) {
             api.cart_changeproductquantity(

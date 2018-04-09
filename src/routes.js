@@ -38,6 +38,9 @@ import Register from './pages/common/Register.vue';
 // 购物车
 import CartList from './pages/cart/List.vue';
 
+// 会员
+import Address from './pages/member/contact/Index.vue';
+
 export default [
     {
         path: '/',
@@ -58,6 +61,10 @@ export default [
     {
         path: '/CartList/',
         component: CartList,
+    },
+    {
+        path: '/Address/',
+        component: Address,
     },
     {
         path: '/consultation/',

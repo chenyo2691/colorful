@@ -55,4 +55,32 @@ export default {
     LOGOUT: 'api/logout',
     // 【201】验证用户注册信息	POST
     REGISTER: 'api/register',
+
+    // 订单
+    // 【701】提交订单	POST
+    SUBMITORDER: 'api/order/submitorder',
+    // 【702】取消订单	POST
+    CANCELORDER: 'api/order/cancelorder',
+    // 【700】获取订单信息	POST
+    GETORDERINFO: 'api/order/getorderinfo',
+    // 【703】获取订单列表	POST
+    GETORDERLIST: 'api/order/getorderlist',
+    // 【704】获取运费信息	POST
+    GETDELIVERYFEE: 'api/order/getdeliveryfee',
+    // 【705】完成支付后的信息更新(测试用)	POST
+    FINISHPAY: 'api/order/finishpay',
+    // 【706】获取可供配送的日期列表	POST
+    GETAVAILABLEDELIVERYDATE: 'api/order/getavailabledeliverydate',
+
+    // 会员
+    // 【801】获取会员地址簿信息	POST
+    GETCONTACTLIST: 'api/member/getcontactlist',
+    // 【802】新增地址项信息	POST
+    CREATECONTACT: 'api/member/createcontact',
+    // 【803】修改地址项信息	POST
+    UPDATECONTACT: 'api/member/updatecontact',
+    // 【804】删除地址簿信息	POST
+    DELETECONTACT: 'api/member/deletecontact',
+    // 【805】获取区域信息	POST
+    GETDISTLIST: 'api/member/getdistlist',
 };
